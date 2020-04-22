@@ -2,6 +2,7 @@ package com.jocabujat.buttonclickapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,12 +23,17 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
+        textView.setText("");
+        textView.setMovementMethod(new ScrollingMovementMethod());
         View.OnClickListener ourOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numTimesClicked = numTimesClicked + 1;
-                String result = "\nThe button got tapped " + numTimesClicked + " times";
-                textView.append(result);
+                String result = "The button got tapped " + numTimesClicked + " time";
+                if (numTimesClicked != 1) {
+                    result += "s";
+                }
+                textView.append(result + "\n");
             }
         };
         button.setOnClickListener(ourOnClickListener);
